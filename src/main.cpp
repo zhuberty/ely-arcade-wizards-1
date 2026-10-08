@@ -1,6 +1,7 @@
 #include "raylib.h"
 #include "resource_dir.h"
 #include "arcade_input.h"
+#include "TextureAtlas.hpp"
 #include <string>
 #include <vector>
 
@@ -13,7 +14,8 @@ int main(void)
     std::string appDir = GetApplicationDirectory();
     std::string imgDir = appDir + "../../assets/images";
     ChangeDirectory(imgDir.c_str());
-    Texture texAtlas = LoadTexture("tiles.png");
+    Texture texAtlasTexture = LoadTexture("tiles.png");
+    TA::get().SetTexture(texAtlasTexture);
 
     std::vector<std::vector<char>> mapDef(20, std::vector<char>(20, '.'));
 
@@ -36,10 +38,10 @@ int main(void)
                 {
                     char tileChar = mapDef[y][x];
                     if (tileChar == '.')
-                        DrawTexturePro(texAtlas, {0, 0, 16, 16}, {(float)x * 16, (float)y * 16, 16, 16}, {0, 0}, 0.0f, WHITE);
+                        TA::get().Draw("floor", {x * TA::TILE_SIZE, y * TA::TILE_SIZE}, {0, 0}, 0.0f, WHITE);
                     if (tileChar == '|') {
-                        DrawTexturePro(texAtlas, {0, 0, 16, 16}, {(float)x * 16, (float)y * 16, 16, 16}, {0, 0}, 0.0f, WHITE);
-                        DrawTexturePro(texAtlas, {0, 32, 16, 16}, {(float)x * 16, (float)y * 16, 16, 16}, {0, 0}, 0.0f, WHITE);                 
+                        TA::get().Draw("floor", {x * TA::TILE_SIZE, y * TA::TILE_SIZE}, {0, 0}, 0.0f, WHITE);
+                        TA::get().Draw("grate", {x * TA::TILE_SIZE, y * TA::TILE_SIZE}, {0, 0}, 0.0f, WHITE);                 
                     }
                 }
             }
@@ -49,7 +51,7 @@ int main(void)
         EndDrawing();
     }
 
-    UnloadTexture(texAtlas);
+    UnloadTexture(texAtlasTexture);
     CloseWindow();
     return 0;
 }
