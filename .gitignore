@@ -8,3 +8,4 @@ Makefile
 *.sln
 *.vcxproj*
 compile_commands.json
+recordings/

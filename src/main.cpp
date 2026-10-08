@@ -18,6 +18,7 @@ int main(void)
     // Load Floor Tile
     std::string appDir = GetApplicationDirectory();
     std::string imgDir = appDir + "../../assets/images";
+
     ChangeDirectory(imgDir.c_str());
     Texture texAtlasTexture = LoadTexture("tiles.png");
     TA::get().SetTexture(texAtlasTexture);
@@ -39,7 +40,7 @@ int main(void)
             if (!recorder.IsRecording())
             {
                 SetTargetFPS(targetFps);
-                recorder.Start("dev_progress.mp4", screenBaseWidth, screenBaseHeight, targetFps);
+                recorder.Start(screenBaseWidth, screenBaseHeight, targetFps);
             }
             else
             {
