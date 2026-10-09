@@ -26,7 +26,7 @@ int main(void)
     mapDef[10][10] = '|';
 
     Camera2D camera = {};
-    camera.zoom = 8.0f;
+    camera.zoom = 10.0f;
     camera.offset = {Conf::BASE_W / 2, Conf::BASE_H / 2};
     camera.target = {10 * TA::TILE_SIZE + TA::TILE_SIZE / 2, 10 * TA::TILE_SIZE + TA::TILE_SIZE / 2};
 
