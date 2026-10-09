@@ -1,19 +1,17 @@
 #include "raylib.h"
 #include "resource_dir.h"
 #include "arcade_input.h"
+#include "GameConfig.hpp"
 #include "TextureAtlas.hpp"
 #include "VideoRecorder.hpp"
+#include "Player.hpp"
 #include <string>
 #include <vector>
 
 int main(void)
 {
-    const int screenBaseWidth = 1280;
-    const int screenBaseHeight = 720;
-    const int targetFps = 60;
-
     SetConfigFlags(FLAG_WINDOW_RESIZABLE);
-    InitWindow(screenBaseWidth, screenBaseHeight, "Wizards");
+    InitWindow(Conf::BASE_W, Conf::BASE_H, "Wizards");
 
     // Load Floor Tile
     std::string appDir = GetApplicationDirectory();
@@ -28,15 +26,20 @@ int main(void)
     mapDef[10][10] = '|';
 
     Camera2D camera = {};
-    camera.zoom = 2.0f;
-    camera.offset = {0, 0};
+    camera.zoom = 8.0f;
+    camera.offset = {Conf::BASE_W / 2, Conf::BASE_H / 2};
+    camera.target = {10 * TA::TILE_SIZE + TA::TILE_SIZE / 2, 10 * TA::TILE_SIZE + TA::TILE_SIZE / 2};
 
     VideoRecorder recorder;
     recorder.SetMaxDuration(360);
 
+    Player player({11 * TA::TILE_SIZE, 10 * TA::TILE_SIZE});
+
     while (!WindowShouldClose())
     {
-        recorder.HandleInput(screenBaseWidth, screenBaseHeight, targetFps);
+        float dt = GetFrameTime();
+
+        recorder.HandleInput(Conf::BASE_W, Conf::BASE_H, Conf::TARGET_FPS);
 
         BeginDrawing();
         BeginMode2D(camera);
@@ -58,8 +61,10 @@ int main(void)
             }
         }
 
-        DrawFPS(0, 0);
+        player.Update(dt);
+
         EndMode2D();
+        DrawFPS(0, 0);
 
         recorder.EndFrame();
         EndDrawing();

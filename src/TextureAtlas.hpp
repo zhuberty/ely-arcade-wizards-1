@@ -20,7 +20,7 @@ public:
     TextureAtlas& operator=(const TextureAtlas&) = delete;
 
     void SetTexture(Texture tex);
-    void Draw(const char* texName, Vector2 dest, Vector2 origin, float rot, Color tint);
+    void Draw(std::string texName, Vector2 dest, Vector2 origin, float rot, Color tint, int frame = 1);
 
 private:
     TextureAtlas() = default;
