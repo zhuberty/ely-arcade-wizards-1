@@ -32,22 +32,11 @@ int main(void)
     camera.offset = {0, 0};
 
     VideoRecorder recorder;
+    recorder.SetMaxDuration(360);
 
     while (!WindowShouldClose())
     {
-        if (IsKeyPressed(KEY_R) && (IsKeyDown(KEY_LEFT_CONTROL) || IsKeyDown(KEY_RIGHT_CONTROL)))
-        {
-            if (!recorder.IsRecording())
-            {
-                SetTargetFPS(targetFps);
-                recorder.Start(screenBaseWidth, screenBaseHeight, targetFps);
-            }
-            else
-            {
-                recorder.Stop();
-                SetTargetFPS(0);
-            }
-        }
+        recorder.HandleInput(screenBaseWidth, screenBaseHeight, targetFps);
 
         BeginDrawing();
         BeginMode2D(camera);
@@ -72,13 +61,7 @@ int main(void)
         DrawFPS(0, 0);
         EndMode2D();
 
-        if (recorder.IsRecording())
-        {
-            recorder.CaptureFrame();
-            if (!recorder.IsRecording()) // auto-stopped at max duration
-                SetTargetFPS(0);
-        }
-        recorder.DrawOverlay();
+        recorder.EndFrame();
         EndDrawing();
     }
 
