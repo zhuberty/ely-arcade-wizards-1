@@ -16,7 +16,11 @@ void Player::Update(float delta)
     _pos.x += _speed * _moveDir.x * delta;
     _pos.y += _speed * _moveDir.y * delta;
 
-    if (_moveDir.x != 0 || _moveDir.y != 0)
+    if (_moveDir.y < 0)
+    {
+        _curAnim = "player.walk.n";
+    }
+    else if (_moveDir.y > 0)
     {
         _curAnim = "player.walk.s";
     }

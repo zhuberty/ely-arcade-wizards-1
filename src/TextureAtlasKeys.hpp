@@ -19,5 +19,6 @@ namespace TAK
         {"grate", {{0, 2}, 1}},
         {"player.stand.s", {{0, 3}, 1}},
         {"player.walk.s", {{0, 4}, 12}},
+        {"player.walk.n", {{0, 5}, 12}},
     };
 }

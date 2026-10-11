@@ -32,6 +32,7 @@ int main(void)
 
     VideoRecorder recorder;
     recorder.SetMaxDuration(360);
+    recorder.SetCaptureFps(60);
 
     Player player({11 * TA::TILE_SIZE, 10 * TA::TILE_SIZE});
 
@@ -39,7 +40,7 @@ int main(void)
     {
         float dt = GetFrameTime();
 
-        recorder.HandleInput(Conf::BASE_W, Conf::BASE_H, Conf::TARGET_FPS);
+        recorder.HandleInput();
 
         BeginDrawing();
         BeginMode2D(camera);
