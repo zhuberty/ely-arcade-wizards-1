@@ -24,6 +24,9 @@ void Player::Update(float delta)
     {
         _curAnim = "player.walk.s";
     }
+    else if (_moveDir.x > 0) {
+        _curAnim = "player.walk.e";
+    }
     else
     {
         _curAnim = "player.stand.s";
