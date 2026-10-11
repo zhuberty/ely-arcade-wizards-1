@@ -20,6 +20,7 @@ namespace TAK
         {"player.stand.s", {{0, 3}, 1}},
         {"player.walk.s", {{0, 4}, 12}},
         {"player.walk.n", {{0, 5}, 12}},
-        {"player.walk.e", {{0, 6}, 7}},
+        {"player.walk.e", {{0, 6}, 12}},
+        {"player.walk.w", {{0, 7}, 12}},
     };
 }
