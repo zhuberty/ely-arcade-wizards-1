@@ -5,6 +5,7 @@
             "includePath": [
                 "${workspaceFolder}/sdk/include/**",
                 "${workspaceFolder}/src/**",
+                "/usr/local/include",
                 "${workspaceFolder}/build/external/raylib-master/src",
                 "${workspaceFolder}/build/external/raylib-master/src/external/glfw/include"
             ],
