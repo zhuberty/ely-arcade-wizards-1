@@ -40,6 +40,7 @@ int main(void)
     {
         float dt = GetFrameTime();
 
+        arcade::UpdateInput();   // once per frame, before any input query (joystick support)
         recorder.HandleInput();
 
         BeginDrawing();

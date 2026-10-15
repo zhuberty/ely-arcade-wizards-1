@@ -1,4 +1,5 @@
 #include "Player.hpp"
+#include "arcade_input.h"
 
 Vector2 Player::GetPos() const { return _pos; }
 
@@ -10,8 +11,11 @@ void Player::SetAnim(std::string anim)
 
 void Player::Update(float delta)
 {
-    _moveDir.x = (IsKeyDown(KEY_D) ? 1.0f : 0.0f) - (IsKeyDown(KEY_A) ? 1.0f : 0.0f);
-    _moveDir.y = (IsKeyDown(KEY_S) ? 1.0f : 0.0f) - (IsKeyDown(KEY_W) ? 1.0f : 0.0f);
+    // Movement from the SDK's input, so it works with the arcade joysticks, W A S D, the
+    // arrow keys and gamepad d-pads. Player::Any = either player's controls.
+    auto down = [](arcade::Action a) { return arcade::IsActionDown(arcade::Player::Any, a); };
+    _moveDir.x = (down(arcade::Action::Right) ? 1.0f : 0.0f) - (down(arcade::Action::Left) ? 1.0f : 0.0f);
+    _moveDir.y = (down(arcade::Action::Down)  ? 1.0f : 0.0f) - (down(arcade::Action::Up)   ? 1.0f : 0.0f);
 
     _pos.x += _speed * _moveDir.x * delta;
     _pos.y += _speed * _moveDir.y * delta;
